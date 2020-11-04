@@ -1,8 +1,8 @@
 var tier = {
     S : { rate: 0.02 },
     A : { rate: 0.2 },
-    B : { rate: 10 },
-    C : { rate: 100 }
+    B : { rate: 10.0 },
+    C : { rate: 100.0 }
 }
 
 var tierItems = {
@@ -144,6 +144,11 @@ function calculateMultiple(value = 1) {
 function initialize()
 {
     populate();
+
+    document.getElementById("rateS").innerHTML = tier.S.rate / 100;
+    document.getElementById("rateA").innerHTML = tier.A.rate / 100;
+    document.getElementById("rateB").innerHTML = tier.B.rate / 100;
+    document.getElementById("rateC").innerHTML = tier.C.rate / 100;
 
     tryNumber = 1;
     document.getElementById("tryNumber").value = tryNumber;

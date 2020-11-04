@@ -63,4 +63,8 @@ form {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.text-center {
+  text-align: center;
+}
 /*# sourceMappingURL=goddess_grace.css.map */
