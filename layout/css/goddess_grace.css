@@ -21,6 +21,10 @@ h3 {
   margin: 10px 0;
 }
 
+h4 {
+  margin: 10px 0;
+}
+
 ul li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -42,8 +46,8 @@ form {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .center {
@@ -66,5 +70,13 @@ form {
 
 .text-center {
   text-align: center;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-gray {
+  color: gray;
 }
 /*# sourceMappingURL=goddess_grace.css.map */
