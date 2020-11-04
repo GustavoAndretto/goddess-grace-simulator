@@ -12,14 +12,24 @@ var tierItems = {
     C: ["Hero Potion Selection Box", "Blessed Shard", "Enhancement Coupon: 100,000", "Attribute Point: 100"]
 }
 
+// Page elements
 var elementTierS = document.getElementById("tierS");
 var elementTierA = document.getElementById("tierA");
 var elementTierB = document.getElementById("tierB");
 var elementTierC = document.getElementById("tierC");
 var elementTryCounter = document.getElementById("tryCounter");
 var elementSilverSpent = document.getElementById("silverSpent");
+var elementMessage = document.getElementById("message");
+var elementRateS = document.getElementById("rateS");
+var elementRateA = document.getElementById("rateA");
+var elementRateB = document.getElementById("rateB");
+var elementRateC = document.getElementById("rateC");
+var elementTryNumber = document.getElementById("tryNumber");
+var elementTryButton = document.getElementById("tryButton")
 
-var tryNumber = 0;
+var tierSAcquired = [false,false,false];
+var eventEnded = false;
+var tryNumber = 1;
 
 function populate()
 {
@@ -28,6 +38,7 @@ function populate()
     {
         var li = document.createElement("li");
         li.innerHTML = tierItems.S[i];
+        li.id = "tierS_li_" + i;
 
         var span = document.createElement("span");
         span.id = "tierS_" + i;
@@ -82,11 +93,25 @@ function populate()
 
 function calculate()
 {
+    if(tierSAcquired[0] && tierSAcquired[1] && tierSAcquired[2]) {
+        eventEnded = true;
+        elementMessage.style.display = "block";
+        return;
+    }
+
     var random = Math.random() * 100.0;
     
     if(random >= 0.0 && random <= tier.S.rate) {
-        // Se random > 0.0 && random <= 0.02 : Tier S
         var randomItem = Math.floor(Math.random() * tierItems.S.length);
+
+        while(tierSAcquired[randomItem] == true)
+        {
+            randomItem = Math.floor(Math.random() * tierItems.S.length);
+        }
+
+        tierSAcquired[randomItem] = true;
+
+        document.getElementById("tierS_li_" + randomItem).classList.add("text-gray");
 
         var elementCounter = document.getElementById("tierS_" + randomItem);
         var counter = elementCounter.innerHTML;
@@ -95,7 +120,6 @@ function calculate()
         elementCounter.innerHTML = number;
     }
     else if(random > tier.S.rate && random <= tier.A.rate) {
-        // Se random > 0.02 && random <= 0.2 : Tier A
         var randomItem = Math.floor(Math.random() * tierItems.A.length);
 
         var elementCounter = document.getElementById("tierA_" + randomItem);
@@ -105,7 +129,6 @@ function calculate()
         elementCounter.innerHTML = number;
     }
     else if(random > tier.A.rate && random <= tier.B.rate) {
-        // Se random > 0.2 && random <= 2 : Tier B
         var randomItem = Math.floor(Math.random() * tierItems.B.length);
 
         var elementCounter = document.getElementById("tierB_" + randomItem);
@@ -115,7 +138,6 @@ function calculate()
         elementCounter.innerHTML = number;
     }
     else if(random > tier.B.rate && random <= tier.C.rate) {
-        // Se random > 2 && random <= 100 : Tier C
         var randomItem = Math.floor(Math.random() * tierItems.C.length);
 
         var elementCounter = document.getElementById("tierC_" + randomItem);
@@ -134,6 +156,10 @@ function calculate()
 }
 
 function calculateMultiple(value = 1) {
+    if(eventEnded){
+        return
+    }
+
     calculate();
 
     if(value < tryNumber) {
@@ -145,19 +171,19 @@ function initialize()
 {
     populate();
 
-    document.getElementById("rateS").innerHTML = tier.S.rate / 100;
-    document.getElementById("rateA").innerHTML = tier.A.rate / 100;
-    document.getElementById("rateB").innerHTML = tier.B.rate / 100;
-    document.getElementById("rateC").innerHTML = tier.C.rate / 100;
+    elementMessage.style.display = "none";
+    elementRateS.innerHTML = tier.S.rate / 100;
+    elementRateA.innerHTML = tier.A.rate / 100;
+    elementRateB.innerHTML = tier.B.rate / 100;
+    elementRateC.innerHTML = tier.C.rate / 100;
 
-    tryNumber = 1;
-    document.getElementById("tryNumber").value = tryNumber;
+    elementTryNumber.value = tryNumber;
 
-    document.getElementById("tryNumber").addEventListener("change", function() {
+    elementTryNumber.addEventListener("change", function() {
         tryNumber = document.getElementById("tryNumber").value;
     });
 
-    document.getElementById("tryButton").addEventListener("click", function() {
+    elementTryButton.addEventListener("click", function() {
         calculateMultiple();
     });
 }
