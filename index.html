@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./layout/css/goddess_grace.css">
+    <title>Goddess' Grace Event Simulator</title>
+</head>
+<body>
+    <div class="center">
+        <h1>Goddess' Grace Event Simulator</h1>
+        <h3>Tier S</h3>
+        <ul id="tierS"></ul>
+        <h3>Tier A</h3>
+        <ul id="tierA"></ul>
+        <h3>Tier B</h3>
+        <ul id="tierB"></ul>
+        <h3>Tier C</h3>
+        <ul id="tierC"></ul>
+        <h3>Counter</h3>
+        <ul>
+            <li>Try Counter: <span id="tryCounter">0</span></li>
+            <li>Silver Spent: <span id="silverSpent">0</span></li>
+        </ul>
+        <form>
+            <input type="number" id="tryNumber" min="1" max="999999">
+            <input type="button" id="tryButton" value="Continuous Offering">
+            <input type="button" onclick="window.location.reload()" value="Reset">
+        </form>
+    </div>
+    <script src="./code/goddess_grace.js"></script>
+</body>
+</html>
